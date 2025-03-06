@@ -29,6 +29,11 @@ const columns: TableProps<User>["columns"] = [
     dataIndex: "id",
     key: "id",
   },
+  {
+    title: "Creation Date", 
+    dataIndex: "creationDate",
+    key: "creationDate",
+  },
 ];
 
 const Dashboard: React.FC = () => {
