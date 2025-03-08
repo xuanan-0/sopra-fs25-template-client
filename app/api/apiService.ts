@@ -18,7 +18,10 @@ export class ApiService {
    * @returns HeadersInit
    */
   private getHeaders(): HeadersInit {
-    const token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
+    if (token){
+      token =token.replace(/"/g,'');
+    }
     return {
       ...this.defaultHeaders,
       ...(token ? { Authorization:`Bearer ${token}` } : {}),
@@ -109,6 +112,8 @@ export class ApiService {
    */
   public async put<T>(endpoint: string, data: unknown): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
+    const headers = this.getHeaders();
+    console.log("PUT Request Headers:", headers);
     const res = await fetch(url, {
       method: "PUT",
       headers: this.getHeaders(),
